@@ -1,0 +1,29 @@
+<%- include('./../partials/header'); %>
+
+<style>
+    body {
+    background-image: url('./../../css/edit-blog.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0.2em;
+  }
+</style>
+
+    <div class="container">
+        <div class="blog-title">
+            <h1 class="mb-4"><%= pageTitle %></h1>
+            <hr>
+        </div>
+
+        <form action="/blogs/<%= blog._id %>?_method=PATCH" method="POST"> 
+             <%- include('_form_fields') %>
+            
+        </form>
+
+        
+
+        
+    </div>
+
+<%- include('./../partials/footer'); %>

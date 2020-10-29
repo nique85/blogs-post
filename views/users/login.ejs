@@ -1,0 +1,54 @@
+<%- include('./../partials/header'); %>
+
+
+<style>
+    body {
+    background-image: url('./../css/Unsplash.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    
+  }
+</style>
+
+
+<section>
+<div class="container register-container">
+
+    <div class="register-header">
+        <h1 class="register-title"><%= pageTitle %></h1>
+    </div>
+    
+
+    <form method="POST" action="/users/login">
+        <div class="form-group register-form">
+                <div class="form-group row">
+                    <div class="form-group col-md-12">
+                        <label for="login">Enter Email Address or Username</label>
+                        <input type="text" class="form-control" id="login" name="login">
+                        <p style="color: red;"><%= message %> </p>  
+                    </div>   
+                </div>
+
+                <div class="form-group row">
+                    <div class="form-group col-md-12" >
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <p style="color: red;"><%= message %> </p> 
+                    </div>
+
+                </div> 
+
+                <div class="form-group row submit-btn">
+                    <button type="submit" class="btn btn-danger col-md-10">Continue</button>
+                </div>
+
+        </div>
+    </form>
+    
+</div>
+</section>
+
+
+
+<%- include('./../partials/footer'); %>

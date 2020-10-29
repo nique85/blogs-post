@@ -1,0 +1,55 @@
+<%- include('./../partials/header'); %>
+
+<div class="container">
+
+    <div class="blog-title">
+        <h1 class="mb-1"><%=  pageTitle%></h1>
+        <a href="/blogs/new">
+            <button type="button" class="btn-sm btn-outline-dark">Add Blog</button>
+        </a>
+       
+        <hr>
+
+        <% blogs.forEach( (blog) => { %>
+            <div class="card col-lg-3">
+                <div class="blog-image mb-2 row">
+                
+                    <a href="/blogs/<%= blog.slug %>" class="">
+                        <img src="<%= blog.image[0] %>" alt="">
+                    </a>
+                    
+                    <div class="top-left">
+                        <%= blog.title %>
+                    </div>
+
+                    <div class="bottom-left"">
+                        By <%= localUser.full_name %>
+                    </div>
+
+                    <form action="/blogs/<%= blog.slug %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn bottom-right"><i class="fa fa-trash"></i></button>
+                    </form>
+                  
+                  
+                </div>
+                <div class="card-date text-muted mb-2 row">
+                    <h7 style="font-size: smaller;">Date Created : <%= blog.dateAdded.toLocaleDateString() %> </h7> 
+                 </div>
+
+                 <div class="hashtag mb-2 row">
+                     <% blog.hashtag.forEach( (hashtag) => {  %> 
+                        <div style="font-size: small;">
+                            <a href="/blogs/hashtag/<%= hashtag.replace(/[^a-zA-Z ]/g, "") %>">
+                           <%= hashtag %></a>
+                        </div> 
+                        
+                     <% }) %> 
+                    
+                 </div>
+
+              </div>
+        <% }) %>
+
+    </div>
+</div>
+<%- include('./../partials/footer'); %>

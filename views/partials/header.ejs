@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+       crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Blogs Post</title>
+
+  </head>
+
+  <body>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+          
+                <h3>Blogs Post</h3>
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                          <% if (user === null) { %>
+                              <li class="nav-item">
+                                <a class="nav-link" href="/users/register">Register</a>
+                              </li>
+
+                              <li class="nav-item">
+                                <a class="nav-link" href="/users/login">Login</a>
+                              </li>
+                          <% }else { %>
+
+                              <li class="nav-item">
+                                <form action="/users/logout" method="POST">
+                                      <button type="submit" class="btn nav-link" style="border: none;">Logout</button>
+                                </form> 
+                              </li>
+                          <% } %>  
+                    </ul>
+                  </div>
+                  
+        </nav>
+
+        <% if (user !== null) { %>
+        <div class="subnav-bar">
+          <ul class="bar-list">
+
+            <li class="item-list">
+              <a href="/blogs/dashboard" class="btn btn-outline-dark">Back to Home Page</a>
+            </li>
+              
+            <li class="item-list">
+                  <a href="/blogs/showall" class="btn btn-outline-dark">Collections</a>
+            </li>
+
+            <li class="item-list">
+              <a href="/blogs/showall/Travel" class="btn btn-outline-dark">Travel</a>
+            </li>
+
+            <li class="item-list">
+              <a href="/blogs/showall/Food" class="btn btn-outline-dark">Food</a>
+            </li>
+
+            <li class="item-list">
+              <a href="/blogs/showall/Technology" class="btn btn-outline-dark">Technology</a>
+            </li>
+
+            <li class="item-list">
+              <a href="/blogs/showall/Events" class="btn btn-outline-dark">Event</a>
+            </li>
+
+            <li class="item-list">
+              <a href="/blogs/showall/Lifestyle" class="btn btn-outline-dark">Life Style</a>
+            </li>
+
+              <li class="item-list">
+                <a href="/blogs/showall/Photography" class="btn btn-outline-dark">Photography
+                </a>
+              </li>
+          </ul>
+
+      </div>
+
+      <% }%>

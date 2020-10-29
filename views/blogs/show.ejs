@@ -1,0 +1,39 @@
+<%- include('./../partials/header'); %>
+
+
+<div class="container">
+
+    <div class="blog-title">
+        <h1 class="mb-1"><%= blog.title %></title></h1>
+        <div class="text-muted mb-2">Date Created <%= blog.dateAdded.toLocaleDateString() %>
+    </div>
+
+</div>
+    
+<div class="container">
+        <div class="infor-image mb-1 col-8 blog-infor">
+            <img src="<%= blog.image[0] %>" alt="">
+
+            <div class="infor-button"> 
+                <% if (localUser.email === blog.creator) { %> 
+                    <a href="/blogs/edit/<%= blog.slug %>" class="btn btn-info mb-1">Edit</a>
+                <% } %> 
+                    
+            </div>
+        </div>
+
+        
+
+        
+
+        <div class="content col-6 blog-infor">
+            <%= blog.content %> 
+        </div>
+
+</div>
+
+
+
+    
+
+<%- include('./../partials/footer'); %>
