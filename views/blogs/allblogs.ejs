@@ -20,10 +20,10 @@
                     </div>
 
                     <div class="bottom-left">
-                        By <%= localUser.full_name %> 
+                        By <%= blog.creator %> 
                     </div>
                 
-                  <% if (localUser.email === blog.creator) { %> 
+                  <% if (localUser.username === blog.creator) { %> 
                     <form action="/blogs/<%= blog.slug %>?_method=DELETE" method="POST" class="d-inline">
                         <button type="submit" class="btn bottom-right"><i class="fa fa-trash"></i></button>
                     </form>
@@ -39,6 +39,7 @@
                         <div style="font-size: small;">
                             <a href="/blogs/hashtag/<%= hashtag.replace(/[^a-zA-Z ]/g, "") %>">
                            <%= hashtag %></a>
+                           &nbsp
                         </div> 
                         
                      <% }) %> 

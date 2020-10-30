@@ -40,6 +40,11 @@
                               </li>
                           <% }else { %>
 
+                            <li class="nav-item">
+                              <button type="text" class="btn nav-link" style="border: none;"><%= user.username %> </button>
+                              
+                            </li>
+
                               <li class="nav-item">
                                 <form action="/users/logout" method="POST">
                                       <button type="submit" class="btn nav-link" style="border: none;">Logout</button>

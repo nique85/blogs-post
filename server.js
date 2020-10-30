@@ -61,7 +61,7 @@ app.post('/users/logout', authenticatorOnlyMiddleware, usersController.logout)
 
 // // User dashboard
 app.get('/blogs/dashboard', authenticatorOnlyMiddleware, usersController.dashboard)
-app.get('/blogs/showall',authenticatorOnlyMiddleware, blogsController.showAllBlogs)
+app.get('/blogs/showall', authenticatorOnlyMiddleware, blogsController.showAllBlogs)
 app.get('/blogs/showall/:category',authenticatorOnlyMiddleware, blogsController.showBlogsByCategory)
 
 

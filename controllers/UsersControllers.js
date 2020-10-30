@@ -120,7 +120,7 @@ const controllers = {
     },
 
     dashboard: (req, res) => {
-        let userID = req.session.user.email
+        let userID = req.session.user.username
 
         BlogsModel.find( {
             creator: userID
@@ -140,12 +140,13 @@ const controllers = {
                     {
                         pageTitle: "Blogs Posted",
                         blogs: result,
-                        display: "none",
+                        display: "",
                         localUser: req.session.user
                     })
             })
             .catch(err => {
-                res.send(err)
+                console.log(err)
+                res.redirect('/users/login')
             })
     },
 

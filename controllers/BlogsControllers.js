@@ -24,13 +24,15 @@ const controllers = {
             hashtagString = makeHashtag(inputString)
         }
 
-        let localUser = req.session.user.email
+        let localUser = req.session.user.username
+        let todayDate = new Date()
 
         BlogsModel.create({
             title: req.body.title,
             creator: localUser,
             category: req.body.category,
             content: req.body.content,
+            dateAdded: todayDate,
             address: [
                         {
                             addr_line_1: req.body.address1,
@@ -41,23 +43,35 @@ const controllers = {
                             contact: req.body.contact
                         }
                         ],
-            hashtag: hashtagString
+            hashtag: hashtagString,
         })
             .then(result => {
                 let filePaths = req.files
+                let imgArr = []
 
-                filePaths.forEach(item => {
+                filePaths.forEach( (item, index) => {
                     cloudinary.uploader.upload(item.path, function(upload_res) {
                         let imgUrl = cloudinary.url(upload_res.public_id)
+                        imgArr.push(imgUrl)
 
-                        console.log(result)
+                        console.log(imgUrl)
                         BlogsModel.findOneAndUpdate(
                             { slug: result.slug },
                             { $push: { image: imgUrl }}  
                         )
+                            .then(updateResult =>{
+                                console.log(updateResult)
+                                if (index === filePaths.length - 1){
+                                    res.redirect('/blogs/' + result.slug)  
+                                }
+                            })
+                            .catch(err =>{
+                                console.log(err)
+                            })
                     })
+                    
                 } )
-                res.redirect('/blogs/' + result.slug)
+                
             })
             .catch(err => {
                 console.log(err)
@@ -82,7 +96,8 @@ const controllers = {
                 })
             })
             .catch(err =>{
-                res.send(err)
+                console.log(err)
+                res.redirect('/blogs/dashboard')
             })
             
     },
@@ -92,7 +107,7 @@ const controllers = {
         let hashtag = "#" + req.params.hashtag
 
         BlogsModel.find( {
-            creator: req.session.user.email,
+            // creator: req.session.user.email,
             hashtag: { $in: hashtag}
         } )
             .sort({
@@ -109,11 +124,13 @@ const controllers = {
                     {
                         pageTitle: req.params.hashtag,
                         blogs: result,
-                        display: ""
+                        display: "none",
+                        localUser: req.session.user
                     })
             })
             .catch(err => {
-                res.send(err)
+                console.log(err)
+                res.redirect('/blogs/dashboard')
             })
     },
 
@@ -162,6 +179,13 @@ const controllers = {
 
     updateBlog: (req, res) => {
 
+        let inputString = req.body.hashtag
+        if (inputString === ""){
+            hashtagString = []
+        }else {
+            hashtagString = makeHashtag(inputString)
+        }
+
         BlogsModel.findById({
             _id: req.params.id
         })
@@ -187,7 +211,7 @@ const controllers = {
                                 }
                                 ],
                     // image: req.body.myFile,
-                    hashtag: req.body.hashtag,
+                    hashtag: hashtagString,
                     slug: newSlug
                 })
                     .then(updateResult => {
@@ -200,6 +224,7 @@ const controllers = {
             })
             .catch(err => {
                 console.log(err)
+                res.redirect('/blogs/dashboard')
             })
     },
 
@@ -207,11 +232,17 @@ const controllers = {
 
         BlogsModel.find()
             .then(result => {
+
+                if (!result) {
+                    res.redirect('/users/dashboard')
+                    return
+                }
+
                 res.render('blogs/allblogs', {
                     pageTitle: "All Blogs Posted",
                     blogs: result,
                     hashtags: result.hashtag,
-                    localUser: req.session.user
+                    localUser: req.session.user,
                 })
             })
             .catch(err => {
@@ -227,7 +258,7 @@ const controllers = {
         })
             .then(result => {
                 res.render('blogs/allblogs', {
-                    pageTitle: "All Blogs Posted",
+                    pageTitle: req.params.category,
                     blogs: result,
                     localUser: req.session.user
                 })

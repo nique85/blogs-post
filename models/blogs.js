@@ -20,7 +20,6 @@ const blogsSchema = new mongoose.Schema( {
                 max: 1000
              },
     dateAdded: {    type: 'Date', 
-                    default: Date.now, 
                     required: true 
                 },
     dateUpdated: {
