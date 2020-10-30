@@ -44,6 +44,7 @@ app.use(session({
 
 // ROUTES
 // Main 
+app.get('/', (req, res) => {res.redirect('/blogs')})
 app.get('/blogs', loginOnlyMiddleware, blogsController.mainPage)
 
 
