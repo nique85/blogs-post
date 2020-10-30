@@ -54,13 +54,11 @@ const controllers = {
                         let imgUrl = cloudinary.url(upload_res.public_id)
                         imgArr.push(imgUrl)
 
-                        console.log(imgUrl)
                         BlogsModel.findOneAndUpdate(
                             { slug: result.slug },
                             { $push: { image: imgUrl }}  
                         )
                             .then(updateResult =>{
-                                console.log(updateResult)
                                 if (index === filePaths.length - 1){
                                     res.redirect('/blogs/' + result.slug)  
                                 }
@@ -210,12 +208,14 @@ const controllers = {
                                     contact: req.body.contact
                                 }
                                 ],
-                    // image: req.body.myFile,
+                    $push: { image: req.body.myFile },
                     hashtag: hashtagString,
                     slug: newSlug
                 })
                     .then(updateResult => {
+
                         res.redirect('/blogs/' + newSlug)
+                        
                     })
                     .catch(err => {
                         console.log(err)

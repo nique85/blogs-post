@@ -25,19 +25,24 @@
                 <div class="form-group row">
                     <div class="form-group col-md-12">
                         <label for="login">Enter Email Address or Username</label>
-                        <input type="text" class="form-control" id="login" name="login">
-                        <p style="color: red;"><%= message %> </p>  
+                        <input required type="text" class="form-control" id="login" name="login">
                     </div>   
                 </div>
 
                 <div class="form-group row">
                     <div class="form-group col-md-12" >
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        <p style="color: red;"><%= message %> </p> 
+                        <input required type="password" class="form-control" id="password" name="password">
                     </div>
 
                 </div> 
+
+                <div class="form-group row">
+                    <div class="form-group col-md-10" >
+                        <span style="font-size: 12px; font-weight: 500; color: red;"><%= message %> </span>
+                    </div>
+                    
+                </div>
 
                 <div class="form-group row submit-btn">
                     <button type="submit" class="btn btn-danger col-md-10">Continue</button>

@@ -5,8 +5,9 @@
 
     <div class="blog-title">
         <h1 class="mb-1"><%= blog.title %></title></h1>
-        <div class="text-muted mb-2">Date Created <%= blog.dateAdded.toLocaleDateString(blog.dateAdded, { year: 'numeric', month: 'long', day: 'numeric' }) %>
-    </div>
+        <div class="text-muted mb-2" style="font-size: 10px;">
+            Date Created : <%= blog.dateAdded.toLocaleDateString(blog.dateAdded, { year: 'numeric', month: 'long', day: 'numeric' }) %>
+        </div>
 
 </div>
     
@@ -53,7 +54,19 @@
 
         <div class="content col-10 blog-infor">
             <h5>Location</h5>
-            <%= blog.address[0].city %>, <%= blog.address[0].country %>
+            <div class="row col-10">
+                <%= blog.address[0].addr_line_1 %>
+            </div>
+            <div class="row col-10">
+                <%= blog.address[0].addr_line_2 %>
+            </div>
+            <div class="row col-10">
+                <%= blog.address[0].city %> <%= blog.address[0].postal %>
+            </div>
+            <div class="row col-10">
+                <%= blog.address[0].country %>
+            </div>
+             
         </div>
 </div>
 

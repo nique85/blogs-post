@@ -82,7 +82,7 @@ app.get('/blogs/hashtag/:hashtag', authenticatorOnlyMiddleware, blogsController.
 
 // Edit and Update Routes
 app.get('/blogs/edit/:slug', blogsController.editBlog)
-app.patch('/blogs/:id', blogsController.updateBlog)
+app.patch('/blogs/:id', authenticatorOnlyMiddleware, blogsController.updateBlog)
 
 // Delete Route
 app.delete('/blogs/:slug', authenticatorOnlyMiddleware, blogsController.deleteBlog)

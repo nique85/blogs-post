@@ -9,7 +9,8 @@ const controllers = {
 
         // Show new user registration form page
         res.render('users/register', {
-            pageTitle: "Let's get started"
+            pageTitle: "Let's get started",
+            message: ""
         })
     },
 
@@ -33,7 +34,11 @@ const controllers = {
         )
              .then(result => {
                  if (result) { 
-                     res.redirect('/users/register')
+                     res.render('users/register', {
+                        pageTitle: "Let's get started",
+                        message: "Username or email already exist!"
+                         
+                     })
                      return
                  }
 
@@ -89,7 +94,7 @@ const controllers = {
         } )
             .then(result =>{
                 if (!result) {
-                    res.redirect('/users/login', {
+                    res.render('users/login', {
                         pageTitle: "Log in to your account",
                         message: "Invalid username or email"
                     })
@@ -101,7 +106,7 @@ const controllers = {
 
                 // check if password is correct by comparing hashes
                 if (hash !== result.hash) {
-                    res.redirect('/users/login', {
+                    res.render('users/login', {
                         pageTitle: "Log in to your account",
                         message: "Invalid password"
                     })
