@@ -231,6 +231,9 @@ const controllers = {
     showAllBlogs: (req, res) => {
 
         BlogsModel.find()
+            .sort({
+                dateAdded: 'desc'
+            })
             .then(result => {
 
                 if (!result) {
@@ -256,6 +259,9 @@ const controllers = {
         BlogsModel.find( {
             category: req.params.category
         })
+            .sort({
+                dateAdded: 'desc'
+            })
             .then(result => {
                 res.render('blogs/allblogs', {
                     pageTitle: req.params.category,

@@ -31,7 +31,7 @@
                   
                 </div>
                 <div class="card-date text-muted mb-2 row">
-                    <h7 style="font-size: smaller;">Date Created : <%= blog.dateAdded.toLocaleDateString() %> </h7> 
+                    <h7 style="font-size: smaller;">Date Created : <%= blog.dateAdded.toLocaleDateString(blog.dateAdded, { year: 'numeric', month: 'long', day: 'numeric' }) %> </h7> 
                  </div>
 
                  <div class="hashtag mb-2 row">
