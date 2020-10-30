@@ -8,7 +8,7 @@ const multer = require('multer');
 const cloudinary = require('cloudinary');
 const upload = multer({ dest: './uploads/' });
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 
 
 const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}`
